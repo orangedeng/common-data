@@ -4,6 +4,8 @@ pipeline {
     stage('clone target repo') {
       steps {
         git(url: 'https://github.com/orangedeng/ui', branch: 'master')
+        sh '''ls -al
+pwd'''
       }
     }
     stage('build') {
