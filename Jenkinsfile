@@ -3,7 +3,6 @@ pipeline {
   stages {
     stage('clone target repo') {
       steps {
-        sh 'mkdir target_repo'
         git(url: 'https://github.com/orangedeng/ui', branch: 'master')
       }
     }
