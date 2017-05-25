@@ -9,8 +9,18 @@ pipeline {
     }
     stage('build') {
       steps {
-        sh 'docker run -v $PWD:$PWD node:6.3 echo "123" > $PWD/test.txt'
-        sh 'docker run -v $PWD:$PWD node:6.3 cat $PWD/test.txt'
+        parallel(
+          "build": {
+            sh 'docker run -v $PWD:$PWD node:6.3 echo "123" > $PWD/test.txt'
+            sh 'docker run -v $PWD:$PWD node:6.3 cat $PWD/test.txt'
+            
+          },
+          "print workspace": {
+            sh '''ls -al
+pwd'''
+            
+          }
+        )
       }
     }
     stage('approval') {
